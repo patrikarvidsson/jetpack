@@ -69,6 +69,9 @@ const Media = moduleSettingsForm(
 				videoPress = this.props.module( 'videopress' ),
 				planClass = getPlanClass( this.props.sitePlan.product_slug );
 
+			const carouselOverride = this.props.getModuleOverride( 'carousel' ),
+				videoPressOverride = this.props.getModuleOverride( 'videopress' );
+
 			const carouselSettings = (
 				<SettingsGroup module={ { module: 'carousel' } } hasChild support={ carousel.learn_more_button }>
 					<ModuleToggle
@@ -76,6 +79,7 @@ const Media = moduleSettingsForm(
 						activated={ isCarouselActive }
 						toggling={ this.props.isSavingAnyOption( 'carousel' ) }
 						toggleModule={ this.props.toggleModuleNow }
+						disabled={ carouselOverride }
 					>
 						<span className="jp-form-toggle-explanation">
 							{
@@ -116,7 +120,7 @@ const Media = moduleSettingsForm(
 					module={ videoPress }>
 					<ModuleToggle
 						slug="videopress"
-						disabled={ this.props.isUnavailableInDevMode( 'videopress' ) }
+						disabled={ this.props.isUnavailableInDevMode( 'videopress' ) || videoPressOverride }
 						activated={ this.props.getOptionValue( 'videopress' ) }
 						toggling={ this.props.isSavingAnyOption( 'videopress' ) }
 						toggleModule={ this.props.toggleModuleNow }
